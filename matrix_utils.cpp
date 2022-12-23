@@ -63,8 +63,37 @@ int* shift_row(int* row, int size)
     for (int i = 0; i < size; i++)
         new_row[(i + shift_counter) % size] = row[i];
 
-    free(row);
+    //free(row);
     return new_row;
+}
+
+int* read_flat_matrix(FILE* in_file, int size, int* res_matrix)
+{
+    for (int i = 0; i < size * size; i++)
+        fscanf(in_file, "%d", &res_matrix[i]);
+       
+    return res_matrix;
+}
+
+void print_flat_matrix(int size, int* matrix)
+{
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++)
+            printf("%d ", matrix[i * size + j]);
+        printf("\n");
+    }
+}
+
+void write_flat_matrix(FILE* f, int* matr, int m, int n)
+{
+    fprintf(f, "%d %d\n", m, n);
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+            fprintf(f, "%d ", matr[i * n + j]);
+
+        fprintf(f, "%\n");
+    }
 }
 
 

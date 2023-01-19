@@ -111,10 +111,10 @@ int main(int argc, char** argv)
 	}
 	
 
-	MPI_Barrier(MPI_COMM_WORLD);
+	//MPI_Barrier(MPI_COMM_WORLD);
 
 
-	FILE* out_file;
+	//FILE* out_file;
 
 	//out_file = fopen(argv[2], "w");
 	/*

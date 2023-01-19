@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "matrix_utils.h"
 
-extern double shift_matrix_cuda(int* matrix, int m, int size);
+extern int* shift_matrix_cuda(int* matrix, int m, int size);
 
 int main(int argc, char** argv)
 

@@ -3,7 +3,6 @@
 #include <time.h>
 #include <iostream>
 #include <fstream>
-#include "matrix_utils.h"
 
 __global__ void kernel(int* matrix, int* res_matrix, const int m, const int size) {
 
@@ -37,17 +36,17 @@ int* shift_matrix_cuda(int* matrix, int m, int size) {
 	cudaMalloc((void**)&g_res_matrix, sizeof(int) * m * size);
 
 
-	printf("CUDA allocated memory for result vector, matrix and input vector\n");
+	printf("CUDA allocated memory for result vector, matrix block\n");
 
 	cudaMemcpy(g_matrix, matrix, sizeof(int) * m * size, cudaMemcpyHostToDevice);
 	cudaMemcpy(g_res_matrix, res_matrix, sizeof(int) * m * size, cudaMemcpyHostToDevice);
-	printf("CUDA copied input matrix and vector\n");
+	printf("CUDA copied input matrix block\n");
 
 
 	printf("Running kernel with N = %d\n", size);
 
 
-	kernel << <size, 1 >> > (g_matrix, g_res_matrix, m, size);
+	kernel << <256, 1 >> > (g_matrix, g_res_matrix, m, size);
 	
 	cudaMemcpy(res_matrix, g_res_matrix, sizeof(int) * m * size, cudaMemcpyDeviceToHost);
 

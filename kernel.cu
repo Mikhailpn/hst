@@ -50,7 +50,6 @@ int* shift_matrix_cuda(int* matrix, int m, int size) {
 	kernel << <size, 1 >> > (g_matrix, g_res_matrix, m, size);
 	
 	cudaMemcpy(res_matrix, g_res_matrix, sizeof(int) * m * size, cudaMemcpyDeviceToHost);
-	print_flat_matrix(size, res_matrix);
 
 	cudaFree(g_matrix);
 	cudaFree(g_res_matrix);

@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include "matrix_utils.h"
+#include <mpi.h>
+#include <fstream>
 
 extern int* shift_matrix_cuda(int* matrix, int m, int size);
 
